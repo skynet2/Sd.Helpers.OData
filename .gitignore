@@ -1,52 +1,67 @@
-# Prerequisites
-*.d
+# Visual Studio artifacts
+bin
+obj
+*.user
+*.suo
+*.vsp
+*.csproj.VisualState.xml
+*.vbproj.VisualState.xml
+*.cache
+TestResults
+.vs
+project.lock.json
+.vscode
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+# CodeReview
+codereview.rc
 
-# Linker output
-*.ilk
-*.map
-*.exp
+# GhostDoc artifacts
+CSharpDriver.sln.GhostDoc.xml
 
-# Precompiled Headers
-*.gch
-*.pch
+# Mac OS artifacts
+.DS_Store
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+# MonoDevelop artifacts
+*.pidb
+*.userprefs
+test-results
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+# NUnit artifacts
+TestResult.xml
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+# Resharper artifacts
+_ReSharper.*
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+# Sandcastle artifacts
+Help
+*.shfbproj_*
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# Vim artifacts
+*.swp
+*~
+
+# Nuget artifacts
+src/packages
+
+# Nupkg artifacts
+*.nupkg
+
+# NCrunch artifacts
+*.ncrunch*
+
+# Merge tool artifacts
+*.cs.orig
+*.vb.orig
+
+# Fake Artifacts
+.fake
+
+# Cake Artifacts
+.dotnet
+
+# Other
+artifacts
+packages
+Tools/FAKE
+Tools/FAKE.Dotnet
+Tools/xunit.runner.console
