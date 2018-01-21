@@ -25,6 +25,8 @@ namespace Sd.Helpers.OData
                 {
                     object instance = (T)Activator.CreateInstance(typeof(T));
 
+                    ProcessContainer(ref instance, res);
+
                     resultList.Add((T)instance);
                 }
 
@@ -33,6 +35,57 @@ namespace Sd.Helpers.OData
             catch (Exception ex)
             {
                 return JsonConvert.DeserializeObject<List<T>>(JsonConvert.SerializeObject(collection)); // FallBack
+            }
+        }
+
+        private static void ProcessContainer(ref object rootObject, object queryItem)
+        {
+            var instance = ObjectHelper.GetPropValue(queryItem, "Instance");
+
+            if (instance != null)
+            {
+                rootObject = instance;
+            }
+
+            var value = ObjectHelper.GetPropValue(queryItem, "Container");
+
+            while (value != null)
+            {
+                var propName = ObjectHelper.GetPropValue(value, "Name") as string;
+                var propValue = ObjectHelper.GetPropValue(value, "Value");
+
+                var complexValue = ObjectHelper.GetPropValue(propValue, "Instance");
+
+                if (complexValue != null)
+                {
+                    propValue = complexValue;
+                }
+
+                var container = ObjectHelper.GetPropValue(propValue, "Container");
+
+                var currentVariable = ObjectHelper.GetPropValue(rootObject, propName);
+
+                if (container != null)
+                {
+                    var propInfo = rootObject.GetType().GetProperty(propName);
+
+                    var propInternalData = ObjectHelper.GetPropValue(rootObject, propName);
+
+                    if (propInternalData == null)
+                    {
+                        ObjectHelper.SetPropValue(rootObject, propName, Activator.CreateInstance(propInfo.PropertyType));
+
+                        currentVariable = ObjectHelper.GetPropValue(rootObject, propName);
+                    }
+
+                    ProcessContainer(ref currentVariable, propValue);
+                }
+                else
+                {
+                    ObjectHelper.SetPropValue(rootObject, propName, propValue);
+                }
+
+                value = ObjectHelper.GetPropValue(value, "Next");
             }
         }
     }
