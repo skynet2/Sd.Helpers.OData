@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using NLog;
 using Sd.Helpers.OData.InternalHelpers;
 
 namespace Sd.Helpers.OData
 {
     public class Converter
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         /// <summary>
         /// 
         /// </summary>
@@ -34,6 +36,14 @@ namespace Sd.Helpers.OData
             }
             catch (Exception ex)
             {
+                Logger.Warn(JsonConvert.SerializeObject(new
+                {
+                    Message = "Error durring collection mapping, using fallback to NewtonJson. Please create ticket at https://github.com/skynet2/Sd.Helpers.OData/issues and" +
+                              "add exception data + State data to the ticket.",
+                    Exception = ex,
+                    State = collection
+                }));
+
                 return JsonConvert.DeserializeObject<List<T>>(JsonConvert.SerializeObject(collection)); // FallBack
             }
         }
