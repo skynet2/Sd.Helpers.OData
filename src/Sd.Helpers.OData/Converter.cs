@@ -23,6 +23,11 @@ namespace Sd.Helpers.OData
             {
                 var resultList = new List<T>();
 
+                if (collection is IEnumerable<T> simpleCast) // for simple queries without $extend and $select
+                {
+                    return simpleCast.ToList();
+                }
+
                 foreach (var res in collection)
                 {
                     object instance = (T)Activator.CreateInstance(typeof(T));
