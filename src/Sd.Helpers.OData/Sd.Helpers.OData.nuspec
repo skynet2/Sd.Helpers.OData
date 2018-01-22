@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Sd.Helpers.OData</id>
+    <title>Sd.Helpers.OData</title>
+    <version>1.0.0</version>
+    <authors>skydev</authors>
+    <owners>skydev</owners>
+    <licenseUrl>https://raw.githubusercontent.com/skynet2/Sd.Helpers.OData/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/skynet2/Sd.Helpers.OData</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A sample project</description>
+    <releaseNotes>Initial release</releaseNotes>
+  </metadata>
+</package>
